@@ -1,4 +1,4 @@
-@(message:String)
+@(user:model.User)
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -20,18 +20,11 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="/">Tus Certificados</a>
+               <a class="navbar-brand" href="/">Tus Certificados: @user.getName() @user.getLastName()</a>
             </div>
             <div class="navbar-collapse collapse">
-               <form class="navbar-form navbar-right" role="form" action="login" method="POST">
-                  <div class="form-group">
-                     <input type="text" name="email" placeholder="Email" class="form-control">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" name="password" placeholder="Password" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-success" >Sign in</button>
-                  <div style="color:red">@message</div>
+               <form class="navbar-form navbar-right" role="form" action="logout" method="POST">
+                  <button type="submit" class="btn btn-success" >Logout</button>
                </form>
             </div>
             <!--/.navbar-collapse -->
@@ -40,36 +33,32 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
          <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <h1>Tus Certificados</h1>
-                  <p>Este es un portal exclusivo para validar la autenticidad de documentos expedidos por entidades certificadoras.</p>
-               </div>
-               <div class="col-md-3">
-                  <img src="assets/images/images.jpeg" width="350">
-               </div>
-            </div>
+         <br>
+         <br>
+         <table class="table table-striped">
+			<tr>
+				<th>Número</th>
+				<th>Nombre</th>
+				<th>Entidad</th>
+				<th></th>
+			<tr>
+         	@user.getDocumentList().map{ document =>
+			<tr>
+				<td>@document.getDocumentNumber()</td>
+				<td>@document.getDescription()</td>
+				<td>@document.getIdEntity().getName()</td>
+				<td><a class="btn btn-primary" href="/validate/document?option=ver&number=@document.getDocumentNumber()">Ver</a></td>
+			</tr>
+			}
+			</table>
          </div>
+         
       </div>
+      
       <div class="container">
-         <!-- Example row of columns -->
-         <div class="row">
-            <div class="col-md-6">
-               <h2>Entidades</h2>
-               <p>Verifica Certificado</p>
-               <p><a class="btn btn-default" href="/validate" role="button">Validar »</a>
-               </p>
-            </div>
-            <div class="col-md-6">
-               <h2>Usuario</h2>
-               <p>Regístrate para almacenar Certificados</p>
-               <p><a class="btn btn-default" href="/sign-up" role="button">Registrate »</a>
-               </p>
-            </div>
-         </div>
          <hr>
          <footer>
-            <p>© Company 2015</p>
+            <p>© Company 2016</p>
          </footer>
       </div>
       <!-- /container -->

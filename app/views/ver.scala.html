@@ -1,4 +1,4 @@
-@(message:String)
+@(document: model.Document)
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -23,56 +23,58 @@
                <a class="navbar-brand" href="/">Tus Certificados</a>
             </div>
             <div class="navbar-collapse collapse">
-               <form class="navbar-form navbar-right" role="form" action="login" method="POST">
-                  <div class="form-group">
-                     <input type="text" name="email" placeholder="Email" class="form-control">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" name="password" placeholder="Password" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-success" >Sign in</button>
-                  <div style="color:red">@message</div>
-               </form>
+              
             </div>
             <!--/.navbar-collapse -->
          </div>
       </div>
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <h1>Tus Certificados</h1>
-                  <p>Este es un portal exclusivo para validar la autenticidad de documentos expedidos por entidades certificadoras.</p>
-               </div>
-               <div class="col-md-3">
-                  <img src="assets/images/images.jpeg" width="350">
-               </div>
-            </div>
-         </div>
-      </div>
       <div class="container">
-         <!-- Example row of columns -->
-         <div class="row">
-            <div class="col-md-6">
-               <h2>Entidades</h2>
-               <p>Verifica Certificado</p>
-               <p><a class="btn btn-default" href="/validate" role="button">Validar »</a>
-               </p>
-            </div>
-            <div class="col-md-6">
-               <h2>Usuario</h2>
-               <p>Regístrate para almacenar Certificados</p>
-               <p><a class="btn btn-default" href="/sign-up" role="button">Registrate »</a>
-               </p>
-            </div>
-         </div>
-         <hr>
-         <footer>
-            <p>© Company 2015</p>
-         </footer>
+      <h1 class="page-header">Certificado</h1>
+      <form name='datosForm' action="signup/user" method="GET">
+      <div class="row">
+	      <div class="col-md-4">
+		      <div class="form-group">
+		         <label class="control-label">Número de Certificado</label>
+		         <p>@document.getDocumentNumber()</p>
+		      </div>
+		      <div class="form-group">
+		         <label class="control-label">Entidad</label>
+		         <p>@document.getIdEntity().getName()</p>
+		      </div>
+		      <div class="form-group">
+		         <label class="control-label">Descripción</label>
+		         <p>@document.getDescription()</p>
+		      </div>
+		      <div class="form-group">
+		         <label class="control-label">Nombres</label>
+		         <p>@document.getIdUser().getName()</p>
+		      </div>
+		      <div class="form-group">
+		         <label class="control-label">Apellidos</label>
+		         <p>@document.getIdUser().getLastName()</p>
+		      </div>
+		      <div class="form-group">
+		         <label class="control-label">Número de Documento</label>
+		         <p>@document.getIdUser().getDocument()</p>
+		      </div>
+		      <div>
+		      <a class="btn btn-primary" href="/user">Atras</a>
+		      </div>
+	      </div>
+	      <div class="form-group">
+		         <img src="/assets/images/@document.getImage()" style="width:600px;height:500px;></p>
+		  </div>
       </div>
-      <!-- /container -->
+      </form>
+      </div>
+      </div>
+      <hr>
+      <footer>
+      <p>© Company 2015</p>
+      </footer>
+      </div>
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
